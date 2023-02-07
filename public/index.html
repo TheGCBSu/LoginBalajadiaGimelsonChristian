@@ -28,13 +28,60 @@
                 background-color: red;
             }
         </style>
+        <script language="javascript">
+            function validateEmail(email) {
+            var emailCheck=/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+            return emailCheck.test(email);
+            }
+    
+            function passvalid() {
+                var pas = document.getElementById('Password').value
+                var valid = true
+                if(pas.length<8){
+                    valid = false
+                    return valid;
+                }
+                let spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                if(spChars.test(pas)==false){
+                    valid=false
+                    return valid;
+                }
+                let alpha = /[a-zA-Z]/
+                if(alpha.test(pas)==false){
+                    valid=false
+                    return valid;
+                }
+                let nums= /[0-1]/
+                if(nums.test(pas)==false){
+                    valid = false;
+                    return valid;
+                }
+                return valid;
+            }
+            function isvalid(){
+                if(document.getElementById('Username').value!="" && document.getElementById('Password').value!=""){
+                    if( passvalid()==true && validateEmail(document.getElementById('Username').value)){
+                        alert("both valid")
+                    }else{
+                        if(passvalid()==false){
+                            alert("Invalid Password")
+                        }
+                        if(validateEmail(document.getElementById('Username').value)==false){
+                            alert("Invalid Email")
+                        }
+                    }
+                }else{
+                    alert("fill up form")
+                }
+            }
+        </script>
     </head>
     <body>
         <table align="center">
             <tr><td colspan="2">LOGIN FORM</td></tr>
             <tr><td>Username:</td><td><input type="text" id="Username" class="txtbox"></td></tr>
             <tr><td>Password:</td><td><input type="text" id="Password" class="txtbox"></td></tr>
-            <tr><td colspan="2"><button>LOGIN</button></td></tr>
+            <tr><td colspan="2"><button onclick="isvalid()">LOGIN</button></td></tr>
         </table>
     </body>
 </html>
